@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-display: "Space Grotesk", sans-serif;
+
+  --color-brand-olive: #7D8A6F;
+  --color-brand-beige: #F5F2ED;
+  --color-brand-white-warm: #FCFAF8;
+  --color-brand-brown: #5C4D42;
+  --color-brand-brown-light: #8C7D70;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-white-warm text-brand-brown font-sans antialiased;
+  }
+}
+
+.editorial-title {
+  @apply font-serif italic tracking-tight;
+}
+
+.modern-display {
+  @apply font-display tracking-tight uppercase;
+}

