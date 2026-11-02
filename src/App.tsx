@@ -700,7 +700,7 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-3 bg-brand-beige/20 p-4 rounded-xl">
                   <Check className="text-brand-olive w-5 h-5" />
-                  <span className="text-sm font-medium text-brand-brown">Garantia 7 dias</span>
+                  <span className="text-sm font-medium text-brand-brown">Garantia 15 dias</span>
                 </div>
               </div>
 
@@ -812,7 +812,7 @@ export default function App() {
             />
             <AccordionItem 
               question="Tem garantia?" 
-              answer="Sim, oferecemos 7 dias de garantia incondicional. Se não ficar satisfeito com o material, devolvemos seu investimento."
+              answer="Sim, oferecemos 15 dias de garantia incondicional. Se não ficar satisfeito com o material, devolvemos seu investimento."
             />
           </div>
           
