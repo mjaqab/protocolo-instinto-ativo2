@@ -530,8 +530,31 @@ export default function App() {
                   </motion.div>
                 ))}
               </div>
+
+              <div className="mt-10">
+                <div className="inline-block bg-brand-olive text-white px-5 py-1.5 rounded-full mb-5 font-display text-[10px] font-bold tracking-[0.2em] uppercase">
+                  + 3 bônus incluídos
+                </div>
+                <div className="space-y-4">
+                  {[
+                    { title: "Calendário Semanal Inteligente", desc: "Uma forma simples de alternar as atividades ao longo da semana e manter o ambiente sempre interessante.", icon: Calendar },
+                    { title: "Checklist de Evolução do Seu Gato", desc: "Acompanhe com calma como seu gato responde às atividades e o que ajustar em cada fase.", icon: Check },
+                    { title: "Guia Inteligente de Uso do Kit", desc: "Como aproveitar melhor os estímulos e por onde começar, sem se perder entre as 50 atividades.", icon: Target },
+                  ].map((b, idx) => (
+                    <div key={idx} className="flex gap-4 p-5 bg-white rounded-2xl border border-brand-olive/20">
+                      <div className="bg-brand-olive/10 p-3 rounded-xl shrink-0 h-fit">
+                        <b.icon className="text-brand-olive w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="editorial-title text-lg text-brand-brown mb-1">{b.title}</h3>
+                        <p className="text-brand-brown-light text-sm leading-relaxed">{b.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            
+
             <div className="relative">
               <div className="bg-brand-white-warm rounded-[40px] overflow-hidden shadow-2xl relative border border-brand-beige">
                 <InventoryCarousel />
@@ -673,7 +696,7 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-3 bg-brand-beige/20 p-4 rounded-xl">
                   <Check className="text-brand-olive w-5 h-5" />
-                  <span className="text-sm font-medium text-brand-brown">Dicas de segurança</span>
+                  <span className="text-sm font-medium text-brand-brown">3 bônus incluídos</span>
                 </div>
                 <div className="flex items-center gap-3 bg-brand-beige/20 p-4 rounded-xl">
                   <Check className="text-brand-olive w-5 h-5" />
