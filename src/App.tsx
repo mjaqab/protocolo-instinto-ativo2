@@ -67,25 +67,26 @@ const InventoryCarousel = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
+      setIndex((i) => (i + 1) % images.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [images.length]);
 
   return (
     <div className="relative w-full h-full min-h-[400px] md:min-h-[500px] overflow-hidden">
-      <AnimatePresence mode="wait">
-        <motion.img
-          key={index}
-          src={images[index]}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="w-full h-full object-cover"
-          alt={`Preview do Kit ${index + 1}`} width={1000} height={667} loading="lazy" decoding="async"
+      {images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          width={1000}
+          height={667}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+          aria-hidden={i !== index}
+          alt={`Preview do Kit ${i + 1}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === index ? 'opacity-100' : 'opacity-0'}`}
         />
-      </AnimatePresence>
+      ))}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10">
         {images.map((_, i) => (
           <button 
@@ -104,31 +105,32 @@ const DemoCarousel = () => {
   const images = DEMO_IMAGES;
   const [index, setIndex] = useState(0);
 
-  const next = () => setIndex((index + 1) % images.length);
-  const prev = () => setIndex((index - 1 + images.length) % images.length);
+  const next = () => setIndex((i) => (i + 1) % images.length);
+  const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      next();
+      setIndex((i) => (i + 1) % images.length);
     }, 4500);
     return () => clearInterval(timer);
-  }, [index]);
+  }, [index, images.length]);
 
   return (
     <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center">
       <div className="relative w-full aspect-[3/4] max-w-md rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={index}
-            src={images[index]}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -25 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="w-full h-full object-contain"
-            alt={`Demonstração do Kit - Página ${index + 1}`} width={800} height={1131} decoding="async"
+        {images.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            width={800}
+            height={1131}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            aria-hidden={i !== index}
+            alt={`Demonstração do Kit - Página ${i + 1}`}
+            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ${i === index ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           />
-        </AnimatePresence>
+        ))}
 
         {/* Navigation arrows with glassmorphism */}
         <button 
@@ -141,7 +143,7 @@ const DemoCarousel = () => {
         <button 
           onClick={(e) => { e.preventDefault(); next(); }}
           className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/95 backdrop-blur-md rounded-full p-2.5 text-brand-brown hover:scale-110 active:scale-95 transition-all shadow-md z-10"
-          aria-label="Próximo"
+          aria-label="Próxima imagem"
         >
           <ChevronDown className="w-5 h-5 -rotate-90" />
         </button>
