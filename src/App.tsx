@@ -42,22 +42,22 @@ const SHOW_TESTIMONIALS = false;
 // Imagens: false = imagens atuais do site (imgur); true = imagens novas em /public/img
 // Frase fixa no topo da página (cutuca a dor do tutor)
 const TOP_MESSAGE = "Seu gato tem comida, casa e carinho. Mas quando foi a última vez que ele caçou alguma coisa?";
-// Imagem da seção "erros" (abaixo da faixa de números). Troque por "/img/sinais.jpg" quando tiver a nova.
-const PAIN_IMAGE = "/img/sinais.jpg";
+// Imagem da seção "erros" (abaixo da faixa de números). Troque por "/img/sinais.webp" quando tiver a nova.
+const PAIN_IMAGE = "/img/sinais.webp";
 const USE_NEW_IMAGES = false;
 const IMG = USE_NEW_IMAGES ? {
-  hero: "/img/instinto2.jpg",
-  mockup: "/img/oferta.jpg",
-  inventory: ["/img/preview_a.jpg", "/img/preview_b.jpg", "/img/preview_c.jpg"],
-  instinct: "/img/instinto.jpg",
+  hero: "/img/instinto2.webp",
+  mockup: "/img/oferta.webp",
+  inventory: ["/img/preview_a.webp", "/img/preview_b.webp", "/img/preview_c.webp"],
+  instinct: "/img/instinto.webp",
 } : {
-  hero: "/img/instinto2.jpg",
+  hero: "/img/instinto2.webp",
   mockup: "https://i.imgur.com/VLRLnfV.png",
   inventory: ["https://i.imgur.com/vedI5ws.jpeg", "https://i.imgur.com/jSG0LQ7.jpeg", "https://i.imgur.com/ipbMxqr.jpeg"],
   instinct: "https://i.imgur.com/9EXVK6I.jpeg",
 };
 // Imagens de demonstração (páginas do kit V4, sempre as novas): coloque os arquivos em /public/demo/
-const DEMO_IMAGES = ["/demo/1.jpg", "/demo/2.jpg", "/demo/3.jpg", "/demo/4.jpg", "/demo/5.jpg"];
+const DEMO_IMAGES = ["/demo/1.webp", "/demo/2.webp", "/demo/3.webp", "/demo/4.webp", "/demo/5.webp"];
 
 // --- Components ---
 
@@ -83,7 +83,7 @@ const InventoryCarousel = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
           className="w-full h-full object-cover"
-          alt={`Preview do Kit ${index + 1}`}
+          alt={`Preview do Kit ${index + 1}`} width={1000} height={667} loading="lazy" decoding="async"
         />
       </AnimatePresence>
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10">
@@ -91,7 +91,8 @@ const InventoryCarousel = () => {
           <button 
             key={i} 
             onClick={() => setIndex(i)}
-            className={`h-1.5 rounded-full transition-all duration-500 ${i === index ? 'bg-brand-olive w-8' : 'bg-white/40 w-4 hover:bg-white/60'}`} 
+            aria-label={`Ir para imagem ${i + 1}`}
+            className={`relative after:absolute after:-inset-3 after:content-[''] h-1.5 rounded-full transition-all duration-500 ${i === index ? 'bg-brand-olive w-8' : 'bg-white/40 w-4 hover:bg-white/60'}`} 
           />
         ))}
       </div>
@@ -125,7 +126,7 @@ const DemoCarousel = () => {
             exit={{ opacity: 0, x: -25 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
             className="w-full h-full object-contain"
-            alt={`Demonstração do Kit - Página ${index + 1}`}
+            alt={`Demonstração do Kit - Página ${index + 1}`} width={800} height={1131} decoding="async"
           />
         </AnimatePresence>
 
@@ -133,7 +134,7 @@ const DemoCarousel = () => {
         <button 
           onClick={(e) => { e.preventDefault(); prev(); }}
           className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/95 backdrop-blur-md rounded-full p-2.5 text-brand-brown hover:scale-110 active:scale-95 transition-all shadow-md z-10"
-          aria-label="Anterior"
+          aria-label="Imagem anterior"
         >
           <ChevronDown className="w-5 h-5 rotate-90" />
         </button>
@@ -152,7 +153,7 @@ const DemoCarousel = () => {
           <button 
             key={i} 
             onClick={() => setIndex(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${i === index ? 'bg-brand-olive w-8' : 'bg-brand-brown/20 w-2 hover:bg-brand-brown/40'}`} 
+            className={`relative after:absolute after:-inset-3 after:content-[''] h-2 rounded-full transition-all duration-300 ${i === index ? 'bg-brand-olive w-8' : 'bg-brand-brown/20 w-2 hover:bg-brand-brown/40'}`} 
             aria-label={`Ir para slide ${i + 1}`}
           />
         ))}
@@ -233,7 +234,7 @@ const AccordionItem = ({ question, answer }: { question: string, answer: string 
     <div className="border-b border-brand-beige py-6 last:border-0">
       <button 
         className="w-full flex justify-between items-center text-left gap-4"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen}
       >
         <span className="font-serif text-xl sm:text-2xl text-brand-brown">{question}</span>
         <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
@@ -264,6 +265,7 @@ export default function App() {
   return (
     <div className="min-h-screen selection:bg-brand-olive selection:text-white overflow-x-hidden">
       <Navbar />
+      <main>
 
       {/* 1. HOOK / HERO */}
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-48 pb-20 px-6 bg-brand-white-warm md:overflow-hidden">
@@ -304,6 +306,7 @@ export default function App() {
             <div className="aspect-[4/5] bg-brand-beige rounded-[40px] overflow-hidden shadow-2xl relative">
               <img 
                 src={IMG.hero} 
+                width={1000} height={667} fetchPriority="high" decoding="async"
                 alt="Gato em posição de caça atrás de uma caixa de papelão, olhando uma bolinha" 
                 className="w-full h-full object-cover object-[70%_50%] hover:scale-105 transition-all duration-700"
               />
@@ -315,7 +318,7 @@ export default function App() {
               50 atividades • passo a passo em fotos
             </div>
             <motion.img
-              src="/demo/1.jpg"
+              src="/demo/1.webp" width={140} height={198} loading="lazy" decoding="async"
               alt="Capa do Protocolo Instinto Ativo"
               animate={{ y: [0, -8, 0] }}
               transition={{ repeat: Infinity, duration: 4 }}
@@ -360,7 +363,7 @@ export default function App() {
             >
               <div className="aspect-square bg-brand-beige rounded-[40px] overflow-hidden shadow-xl">
                 <img 
-                  src={PAIN_IMAGE} 
+                  src={PAIN_IMAGE} loading="lazy" decoding="async" width={1000} height={1000} 
                   alt="Gato indiferente ao lado de uma tigela cheia e de um brinquedo parado" 
                   className="w-full h-full object-cover"
                 />
@@ -400,7 +403,7 @@ export default function App() {
                 ))}
               </div>
               <div className="mt-12 p-8 bg-brand-brown text-white rounded-[32px] shadow-lg">
-                <h4 className="editorial-title text-xl mb-4 italic">Por que parece certo?</h4>
+                <h3 className="editorial-title text-xl mb-4 italic">Por que parece certo?</h3>
                 <p className="text-brand-beige/80 leading-relaxed text-sm">
                   Porque o gato está alimentado, seguro e cheio de carinho. O que falta não é cuidado: é oportunidade de caçar, explorar e resolver pequenos desafios. Sinais como dormir demais, miar à noite ou arranhar os móveis podem ter várias causas; se forem intensos, persistentes ou aparecerem de repente, procure um veterinário antes.</p>
               </div>
@@ -422,7 +425,7 @@ export default function App() {
             light
           />
           <div className="mb-16 rounded-[40px] overflow-hidden shadow-2xl border border-white/10 max-w-2xl mx-auto">
-            <img src={IMG.instinct} alt="Gato em posição de caça atrás de uma caixa de papelão" className="w-full opacity-90" />
+            <img src={IMG.instinct} loading="lazy" decoding="async" width={1000} height={667} alt="Gato em posição de caça atrás de uma caixa de papelão" className="w-full opacity-90" />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16">
             {[
@@ -479,7 +482,7 @@ export default function App() {
               >
                 <div className="bg-white p-10 rounded-[32px] border border-brand-beige h-full shadow-sm hover:shadow-xl transition-all hover:bg-brand-beige/10">
                   <span className="editorial-title text-5xl text-brand-olive/20 group-hover:text-brand-olive/40 transition-colors">{item.step}</span>
-                  <h4 className="font-display font-bold uppercase tracking-widest text-sm mt-6 mb-4 text-brand-brown">{item.title}</h4>
+                  <h3 className="font-display font-bold uppercase tracking-widest text-sm mt-6 mb-4 text-brand-brown">{item.title}</h3>
                   <p className="text-brand-brown-light text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </motion.div>
@@ -519,7 +522,7 @@ export default function App() {
                       <item.icon className="text-brand-olive w-6 h-6" />
                     </motion.div>
                     <div>
-                      <h4 className="editorial-title text-xl text-brand-brown mb-1">{item.title}</h4>
+                      <h3 className="editorial-title text-xl text-brand-brown mb-1">{item.title}</h3>
                       <p className="text-brand-brown-light text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   </motion.div>
@@ -633,7 +636,7 @@ export default function App() {
           />
           
           <div className="bg-white rounded-[48px] shadow-[0_32px_64px_-16px_rgba(125,138,111,0.15)] border border-brand-beige p-8 md:p-16 relative overflow-hidden">
-            <img src="/img/oferta.jpg" alt="Kit em tablet e celular" className="w-full rounded-3xl mb-10 object-cover aspect-[16/9]" />
+            <img src="/img/oferta.webp" loading="lazy" decoding="async" width={1000} height={667} alt="Kit em tablet e celular" className="w-full rounded-3xl mb-10 object-cover aspect-[16/9]" />
             
             <div className="relative z-10">
               <div className="inline-block bg-brand-olive/10 text-brand-olive px-6 py-2 rounded-full mb-8 font-display text-[10px] font-bold tracking-[0.2em] uppercase">
@@ -805,6 +808,8 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      </main>
 
       {/* FOOTER */}
       <footer className="py-12 bg-brand-white-warm border-t border-brand-beige">
