@@ -31,7 +31,7 @@ import {
 import { useState, useEffect } from 'react';
 
 // --- Configuração editável ---
-const CHECKOUT_URL = "https://pay.hotmart.com/L108286178R";
+const CHECKOUT_URL = "https://pay.hotmart.com/L108286178R?checkoutMode=10";
 // Preço em dólar. Ajuste conforme a estratégia. Deixe ORIGINAL_PRICE vazio ("") para não mostrar preço "De".
 const ORIGINAL_PRICE = "";
 const PRICE_MAIN = "US$ 12,90";
